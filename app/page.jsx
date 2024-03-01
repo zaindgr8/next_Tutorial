@@ -1,9 +1,14 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
+import Navbar from "./navbar/page"
+
 
 const Page = () => {
   return (
-    <div>Home Page</div>
-  )
-}
+  <>
+<Navbar/>
+  </>
+  );
+};
 
-export default Page
+export default Page;

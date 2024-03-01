@@ -8,6 +8,9 @@ export function GET() {
 
 export async function POST(req){
   let payload= await req.json()
-  console.log(payload.name)
-  return NextResponse.json({result:"Hello"})
+  console.log(payload)
+  if(!payload.name || !payload.email || !payload.age){
+      return NextResponse.json({err:"Enter Complete Details", status:false}, {status:404})
+  }
+  return NextResponse.json({result:"User Added", success:true}, {status:200})
 }
