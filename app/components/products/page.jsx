@@ -1,8 +1,9 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../navbar/page";
+import Delete from "../DeleteProduct"
 
 // const fetchData = async () => {
 //   try {
@@ -15,26 +16,36 @@ import Navbar from "../../navbar/page";
 
 // fetchData();
 
-const Page = () => {
+const Page = (props) => {
   const [products, setProducts] = useState([]);
-  const getData = async () => {
-    const response = await axios.get("http://localhost:3000/api/products");
-    setProducts(response.data.result);
-    console.log(response.data.result);
-  };
-  getData();
+  useEffect(()=>{
+const getData = async () => {
+  const response = await axios.get("http://localhost:3000/api/products", {cache:"no-cache"});
+  setProducts(response.data.result);
+  console.log(response.data.result);
+};
+getData();
+  },[])
+
 
   return (
     <>
       <Navbar />
       {products?.map((item) => (
-        <ul className="mb-2 p-5">
+        <ul className="mb-1 p-5">
           <li>Name: {item.name}</li>
           <li>Price: {item.price}</li>
           <li>Company: {item.company}</li>
           <li>Color: {item.color}</li>
           <li>Category:{item.category}</li>
-          <button><Link href={`/components/products`}></Link></button>
+          <li>ID: {item._id}</li>
+          <button className="text-yellow-500 border-2 p-1 rounded-lg ">
+            <Link href={`/components/products/${item._id}`}>Edit</Link>
+          </button>
+          <button><Delete id={item._id}/></button>
+          {/* <button className="text-red-500 border-2 p-1 rounded-lg ml-2">
+            <Link href={`components/products/${item._id}`}>Delete</Link>
+          </button> */}
         </ul>
       ))}
     </>

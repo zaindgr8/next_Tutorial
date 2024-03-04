@@ -26,7 +26,7 @@ export async function GET() {
   try {
     await mongoose.connect(connectString);
     const data = await Product.find();
-    return NextResponse.json({ result: data });
+    return NextResponse.json({ result: data, success:true });
   } catch (error) {
     console.error("Error fetching products:", error);
     return NextResponse.json({ result: "error" });

@@ -19,3 +19,11 @@ export async function GET(req, res){
     const result= await Product.findById(productId)
     return NextResponse.json({result})
 }
+
+export async function DELETE(req, res){
+    let productId= res.params.productid
+    const record={_id:productId}
+    await mongoose.connect(connectString)
+    const result= await Product.deleteOne(record)
+    return NextResponse.json({result, success:true})
+}

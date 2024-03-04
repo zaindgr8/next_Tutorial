@@ -6,7 +6,7 @@ const Navbar = () => {
     <header>
       <ul className="p-5 flex gap-x-4 bg-gray-800 text-white ">
         <li className="hover:text-blue-400">
-          <Link href="/components/addProducts">Add Products</Link>
+          <Link href="/components/addProducts">Add Products </Link>
         </li>
         <li className="hover:text-blue-400">
           <Link href="/components/products">Products</Link>
